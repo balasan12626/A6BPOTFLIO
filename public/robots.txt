@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://a6b.in/sitemap.xml

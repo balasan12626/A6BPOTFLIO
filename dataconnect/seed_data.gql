@@ -1,0 +1,71 @@
+mutation CreateDemoData @transaction @auth(level: USER, insecureReason: "This mutation is for seeding demo data and should only be run by authenticated users.") {
+  user_insertMany(data: [
+    {
+      id: "6f5a3e1b-2d9c-4f8e-b7a1-0c4d5e6f7a8b",
+      username: "john_doe",
+      email: "john.doe@example.com",
+      createdAt: "2023-01-01T10:00:00Z",
+      displayName: "John Doe",
+      bio: "An avid writer and reader.",
+      profilePictureUrl: "https://example.com/john.jpg"
+    },
+    {
+      id: "7a8b9c0d-1e2f-3g4h-5i6j-7k8l9m0n1o2p",
+      username: "jane_smith",
+      email: "jane.smith@example.com",
+      createdAt: "2023-01-02T11:00:00Z",
+      displayName: "Jane Smith",
+      bio: "Passionate about technology and innovation.",
+      profilePictureUrl: "https://example.com/jane.jpg"
+    }
+  ])
+  post_insertMany(data: [
+    {
+      id: "123e4567-e89b-12d3-a456-426614174000",
+      title: "My First Blog Post",
+      content: "This is the content of my very first blog post. Exciting!",
+      createdAt: "2023-01-05T14:30:00Z",
+      isPublished: true,
+      authorId: "6f5a3e1b-2d9c-4f8e-b7a1-0c4d5e6f7a8b"
+    },
+    {
+      id: "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6",
+      title: "Exploring New Horizons",
+      content: "A deep dive into the future of app development.",
+      createdAt: "2023-01-07T09:00:00Z",
+      isPublished: true,
+      authorId: "7a8b9c0d-1e2f-3g4h-5i6j-7k8l9m0n1o2p"
+    },
+    {
+      id: "b2c3d4e5-f6a7-8b9c-0d1e-2f3a4b5c6d7e",
+      title: "Draft Post",
+      content: "This is a draft that is not yet published.",
+      createdAt: "2023-01-08T16:00:00Z",
+      isPublished: false,
+      authorId: "6f5a3e1b-2d9c-4f8e-b7a1-0c4d5e6f7a8b"
+    }
+  ])
+  comment_insertMany(data: [
+    {
+      id: "c3d4e5f6-a7b8-9c0d-1e2f-3g4h5i6j7k8l",
+      content: "Great post, John!",
+      createdAt: "2023-01-06T15:00:00Z",
+      authorId: "7a8b9c0d-1e2f-3g4h-5i6j-7k8l9m0n1o2p",
+      postId: "123e4567-e89b-12d3-a456-426614174000"
+    },
+    {
+      id: "d4e5f6a7-b8c9-0d1e-2f3g-4h5i6j7k8l9m",
+      content: "Very insightful, Jane!",
+      createdAt: "2023-01-08T10:00:00Z",
+      authorId: "6f5a3e1b-2d9c-4f8e-b7a1-0c4d5e6f7a8b",
+      postId: "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6"
+    }
+  ])
+  follow_insertMany(data: [
+    {
+      followerId: "6f5a3e1b-2d9c-4f8e-b7a1-0c4d5e6f7a8b",
+      followedId: "7a8b9c0d-1e2f-3g4h-5i6j-7k8l9m0n1o2p",
+      createdAt: "2023-01-10T08:00:00Z"
+    }
+  ])
+}

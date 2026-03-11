@@ -1,6 +1,6 @@
-# AB Startup Website (React + Firebase)
+# A6B Startup Website (React + Firebase)
 
-Modern, professional startup website for **AB** software development company.
+Modern, professional startup website for **A6B** software development company.
 
 ## Features
 - Pages: Home, About, Services, Technologies, Pricing, Blog, Contact

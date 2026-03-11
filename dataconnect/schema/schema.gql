@@ -1,0 +1,31 @@
+type User @table {
+  username: String!
+  email: String!
+  createdAt: Timestamp!
+  displayName: String
+  bio: String
+  profilePictureUrl: String
+}
+
+type Post @table {
+  title: String!
+  content: String!
+  createdAt: Timestamp!
+  updatedAt: Timestamp
+  isPublished: Boolean
+  author: User!
+}
+
+type Comment @table {
+  content: String!
+  createdAt: Timestamp!
+  updatedAt: Timestamp
+  author: User!
+  post: Post!
+}
+
+type Follow @table(key: ["follower", "followed"]) {
+  follower: User!
+  followed: User!
+  createdAt: Timestamp!
+}

@@ -1,0 +1,43 @@
+query ListRecentPosts @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  posts(orderBy: [{createdAt: DESC}], limit: 10) {
+    id
+    title
+    content
+    createdAt
+    author {
+      id
+      username
+      displayName
+    }
+  }
+}
+
+query GetMyProfile @auth(level: USER) {
+  user(key: {id_expr: "auth.uid"}) {
+    id
+    username
+    email
+    displayName
+    bio
+    profilePictureUrl
+    createdAt
+  }
+}
+
+mutation CreateNewPost($title: String!, $content: String!) @auth(level: USER) {
+  post_insert(data: {
+    title: $title,
+    content: $content,
+    authorId_expr: "auth.uid",
+    createdAt_expr: "request.time",
+    isPublished: true
+  })
+}
+
+mutation FollowUser($followedUserId: UUID!) @auth(level: USER) {
+  follow_insert(data: {
+    followerId_expr: "auth.uid",
+    followedId: $followedUserId,
+    createdAt_expr: "request.time"
+  })
+}
