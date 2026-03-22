@@ -148,17 +148,38 @@ const techCategories = [
 const techStack = techCategories.flatMap(c => c.items);
 
 function Header({ page, setPage, theme, setTheme }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleNav = (link) => {
+    setPage(link);
+    setIsOpen(false);
+  };
+
   return (
     <header className="header">
       <div className="brand">A6B</div>
-      <nav>
+      
+      <button className="mobile-toggle" onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? '✕' : '☰'}
+      </button>
+
+      <nav className={isOpen ? 'nav-open' : ''}>
         {navLinks.map((link) => (
-          <button key={link} className={page === link ? 'active' : ''} onClick={() => setPage(link)}>
+          <button 
+            key={link} 
+            className={page === link ? 'active' : ''} 
+            onClick={() => handleNav(link)}
+          >
             {link}
           </button>
         ))}
+        {/* Theme toggle moves into nav for mobile if needed, but keeping it visible for now */}
+        <button className="theme-toggle mobile-only-theme" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
       </nav>
-      <button className="theme-toggle" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+
+      <button className="theme-toggle hide-on-mobile" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
         {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
       </button>
     </header>
@@ -578,32 +599,32 @@ export default function App() {
       case 'About': return {
         title: "About A6B | Startup Software Solutions India",
         desc: "Founded in Tamil Nadu, A6B empowers 1000+ startups with production-ready software. Leading tech partner with 10+ years experience in SaaS and AI.",
-        url: "https://a6b.in/about"
+        url: "https://a6bpotfolio.web.app/about"
       };
       case 'Services': return {
         title: "Web, Mobile & SaaS Development Services | A6B Engineering",
         desc: "Professional web platforms, mobile apps, SaaS products & AI solutions. Custom software engineering for Indian startups looking to scale globally.",
-        url: "https://a6b.in/services"
+        url: "https://a6bpotfolio.web.app/services"
       };
       case 'Technologies': return {
         title: "Modern Tech Stack: React, Node.js, AI, AWS | A6B Engineering",
         desc: "Full-stack expertise in React, Next.js, OpenAI, AWS, and DevOps. We use a comprehensive ecosystem of modern frameworks built for scale.",
-        url: "https://a6b.in/technologies"
+        url: "https://a6bpotfolio.web.app/technologies"
       };
       case 'Pricing': return {
         title: "Transparent Startup MVP & SaaS Pricing | A6B Engineering",
         desc: "Affordable startup MVP packages and enterprise SaaS solutions. Transparent pricing with clear timelines for Indian digital leaders.",
-        url: "https://a6b.in/pricing"
+        url: "https://a6bpotfolio.web.app/pricing"
       };
       case 'Contact': return {
         title: "Contact A6B | Hire Best Software Team in India",
         desc: "Get a free consultation for your startup. Discuss your web, mobile, or AI project. We respond within 24 hours. Located in Salem, Tamil Nadu.",
-        url: "https://a6b.in/contact"
+        url: "https://a6bpotfolio.web.app/contact"
       };
       default: return {
         title: "A6B Engineering | Premium Software Solutions for Startups",
         desc: "Build MVPs to scalable apps. A6B delivers high-performance SaaS, mobile & AI solutions for Indian startups. 50+ projects delivered successfully.",
-        url: "https://a6b.in"
+        url: "https://a6bpotfolio.web.app"
       };
     }
   };
@@ -624,14 +645,14 @@ export default function App() {
         <meta property="og:description" content={seo.desc} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={seo.url} />
-        <meta property="og:image" content="https://a6b.in/og-preview.png" />
+        <meta property="og:image" content="https://a6bpotfolio.web.app/og-preview.png" />
         <meta property="og:site_name" content="A6B Engineering" />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seo.title} />
         <meta name="twitter:description" content={seo.desc} />
-        <meta name="twitter:image" content="https://a6b.in/og-preview.png" />
+        <meta name="twitter:image" content="https://a6bpotfolio.web.app/og-preview.png" />
 
         {/* Structured Data for SEO */}
         <script type="application/ld+json">
@@ -640,8 +661,8 @@ export default function App() {
               "@context": "https://schema.org",
               "@type": "Organization",
               "name": "A6B Engineering",
-              "url": "https://a6b.in",
-              "logo": "https://a6b.in/logo.png",
+              "url": "https://a6bpotfolio.web.app",
+              "logo": "https://a6bpotfolio.web.app/logo.png",
               "sameAs": [
                 "https://linkedin.com/company/a6b",
                 "https://twitter.com/a6b",
@@ -652,9 +673,9 @@ export default function App() {
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
               "name": "A6B Engineering",
-              "image": "https://a6b.in/logo.png",
-              "@id": "https://a6b.in",
-              "url": "https://a6b.in",
+              "image": "https://a6bpotfolio.web.app/logo.png",
+              "@id": "https://a6bpotfolio.web.app",
+              "url": "https://a6bpotfolio.web.app",
               "telephone": companyInfo.phone,
               "address": {
                 "@type": "PostalAddress",
